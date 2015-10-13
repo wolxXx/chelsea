@@ -1,0 +1,25 @@
+{
+  "name": "chelsea",
+  "version": "0.0.1",
+  "authors": [
+    "wolxXx <devops@wolxXx.de>"
+  ],
+  "description": "js tools",
+  "main": "chelsea.js",
+  "moduleType": [
+    "es6"
+  ],
+  "keywords": [
+    "js",
+    "tools"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
