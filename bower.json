@@ -1,6 +1,6 @@
 {
   "name": "chelsea",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "authors": [
     "wolxXx <devops@wolxXx.de>"
   ],
@@ -11,6 +11,9 @@
   ],
   "keywords": [
     "js",
+    "vanilla js",
+    "javascript",
+    "vanilla javascript",
     "tools"
   ],
   "license": "MIT",

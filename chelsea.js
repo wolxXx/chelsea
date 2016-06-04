@@ -115,7 +115,7 @@ var Chelsea = {
         return color;
     },
     getRandomHalfTransparentColor: function () {
-        return 'rgba(' + parseInt(Math.random() * 255) + ', ' + parseInt(Math.random() * 255) + ', ' + parseInt(Math.random() * 255) + ', ' + Math.random() + ')'
+        return 'rgba(' + parseInt(Math.random() * 255) + ', ' + parseInt(Math.random() * 255) + ', ' + parseInt(Math.random() * 255) + ', ' + parseFloat(Math.random()).toPrecision(1) + ')'
     },
     encodeBase64                 : function (input) {
         return Chelsea.Base64.encode(input);
