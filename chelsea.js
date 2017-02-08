@@ -1,5 +1,5 @@
 var Chelsea = {
-    generateUUID                 : function () {
+    generateUUID: function () {
         var d = new Date().getTime();
         return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
             var r = (d + Math.random() * 16) % 16 | 0;
@@ -7,91 +7,29 @@ var Chelsea = {
             return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
         });
     },
-    getPassword                  : function (length) {
-        length       = length || 10;
-        var password = '';
-        var alphabet = [
-            'a',
-            'b',
-            'c',
-            'd',
-            'e',
-            'f',
-            'g',
-            'h',
-            'i',
-            'j',
-            'k',
-            'l',
-            'm',
-            'n',
-            'o',
-            'p',
-            'q',
-            'r',
-            's',
-            't',
-            'u',
-            'v',
-            'w',
-            'x',
-            'y',
-            'z',
-            'A',
-            'B',
-            'C',
-            'D',
-            'E',
-            'F',
-            'G',
-            'H',
-            'I',
-            'J',
-            'K',
-            'L',
-            'M',
-            'N',
-            'O',
-            'P',
-            'Q',
-            'R',
-            'S',
-            'T',
-            'U',
-            'V',
-            'W',
-            'X',
-            'Y',
-            'Z',
-            '1',
-            '2',
-            '3',
-            '4',
-            '5',
-            '6',
-            '7',
-            '8',
-            '9',
-            '0',
-            ',',
-            '.',
-            '-',
-            '_',
-            '!',
-            '"',
-            '$',
-            '%',
-            '&',
-            '(',
-            ')',
-            '[',
-            ']'
-        ];
-        while (password.length < length) {
-            var index = Math.abs(Math.round(Math.random() * alphabet.length) - 1);
-            password += alphabet[index];
-        }
-        return password;
+
+    getBadAss                    : function (length) {
+        length = length || 10;
+        return this.PasswordGenerator.getBadAss(length);
+    },
+    generateSerialKey            : function () {
+        return this.PasswordGenerator.generateSerialKey();
+    },
+    getNumericPassword           : function (length) {
+        length = length || 10;
+        return this.PasswordGenerator.getNumericPassword(length);
+    },
+    getSimpleLowercasePassword   : function (length) {
+        length = length || 10;
+        return this.PasswordGenerator.getSimpleLowercasePassword(length);
+    },
+    getSimpleUppercasePassword   : function (length) {
+        length = length || 10;
+        return this.PasswordGenerator.getSimpleUppercasePassword(length);
+    },
+    getHumanReadablePassword     : function (length) {
+        length = length || 10;
+        return this.PasswordGenerator.getHumanReadablePassword(length);
     },
     replaceAll                   : function (find, replace, str) {
         return str.replace(new RegExp(find, 'g'), replace);
@@ -123,6 +61,166 @@ var Chelsea = {
     decodeBase64                 : function (input) {
         return Chelsea.Base64.decode(input);
     }
+};
+
+Chelsea.PasswordGenerator = {
+    getHumanReadablePassword  : function (length) {
+        length       = length || 10;
+        var alphabet = this.lowerCaseAlphabet.concat(this.upperCaseAlphabet).concat(this.numericAlphabet);
+        alphabet     = alphabet.filter(function (testValue) {
+            return -1 === [
+                    '0',
+                    'o',
+                    'O',
+                    'L',
+                    'l',
+                    'I',
+                    'i',
+                    'j',
+                    '1',
+                    'm',
+                    'n',
+                    'h',
+                    'w',
+                    'v',
+                    'G',
+                    '6',
+                    '5',
+                    'S',
+                    'B',
+                    'b',
+                    '8' //sad beep from bb-8
+                ].indexOf(testValue);
+        });
+        return this.generatePassword(alphabet, length);
+    },
+    getNumericPassword        : function (length) {
+        length = length || 10;
+        return this.generatePassword(this.numericAlphabet, length);
+    },
+    getSimpleUppercasePassword: function (length) {
+        length = length || 10;
+        return this.generatePassword(this.numericAlphabet.concat(this.upperCaseAlphabet), length);
+    },
+    getSimpleLowercasePassword: function (length) {
+        length = length || 10;
+        return this.generatePassword(this.numericAlphabet.concat(this.lowerCaseAlphabet), length);
+    },
+    getBadAss                 : function (length) {
+        length = length || 10;
+        return this.generatePassword(null, length);
+    },
+
+    generateSerialKey: function () {
+        var simpleUppercasPassword = this.getSimpleUppercasePassword(20);
+        var serialKey              = '';
+        for (var i = 0; i < simpleUppercasPassword.length; i++) {
+            serialKey += simpleUppercasPassword[i];
+            if (0 !== i && i % 4 === 1) {
+                serialKey += '-';
+            }
+        }
+
+        return serialKey;
+    },
+
+    generatePassword: function (alphabet, length) {
+        length = length || 10;
+        if (!alphabet) {
+            alphabet = this.numericAlphabet.concat(this.upperCaseAlphabet).concat(this.lowerCaseAlphabet).concat(this.specialSignAlphabet);
+        }
+        var password = '';
+
+        while (password.length < length) {
+            var index = Math.abs(Math.round(Math.random() * alphabet.length) - 1);
+            password += alphabet[index];
+        }
+        return password;
+    },
+
+    lowerCaseAlphabet  : [
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g',
+        'h',
+        'i',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z'
+    ],
+    upperCaseAlphabet  : [
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z'
+    ],
+    numericAlphabet    : [
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '0'
+    ],
+    specialSignAlphabet: [
+        ',',
+        '.',
+        '-',
+        '_',
+        '!',
+        '"',
+        '$',
+        '%',
+        '&',
+        '(',
+        ')',
+        '[',
+        ']'
+    ]
 };
 
 Chelsea.Base64 = {
