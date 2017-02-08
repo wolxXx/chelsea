@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chelsea -Test</title>
+    <script src="chelsea.js"></script>
+    <style>
+        #container {
+            margin : auto 50px;
+        }
+
+        #container .generator {
+            border     : solid 1px #ccc;
+            background : #efefef;
+            padding    : 5px 10px;
+            margin-top : 40px;
+        }
+
+        #container .generator button, #container .generator span {
+            border        : solid 1px #666;
+            background    : #ccc;
+            padding       : 5px 10px;
+            border-radius : 10px;
+            min-width     : 100px;
+            display       : inline-block;
+        }
+
+    </style>
+</head>
+<body>
+<div id="container">
+    <h1>Demo</h1>
+    <h2>Chelsea loves Vanilla.js!</h2>
+    <div class="generator">
+        <fieldset>
+            <legend>getSimpleUppercasePassword</legend>
+            <button data-method="getSimpleUppercasePassword">generate</button>
+            <span class="output"></span>
+        </fieldset>
+    </div>
+    <div class="generator">
+        <fieldset>
+            <legend>getSimpleLowercasePassword</legend>
+            <button data-method="getSimpleLowercasePassword">generate</button>
+            <span class="output"></span>
+        </fieldset>
+    </div>
+    <div class="generator">
+        <fieldset>
+            <legend>getNumericPassword</legend>
+            <button data-method="getNumericPassword">generate</button>
+            <span class="output"></span>
+        </fieldset>
+    </div>
+    <div class="generator">
+        <fieldset>
+            <legend>getHumanReadablePassword</legend>
+            <button data-method="getHumanReadablePassword">generate</button>
+            <span class="output"></span>
+        </fieldset>
+    </div>
+    <div class="generator">
+        <fieldset>
+            <legend>getBadAss</legend>
+            <button data-method="getBadAss">generate</button>
+            <span class="output"></span>
+        </fieldset>
+    </div>
+    <div class="generator">
+        <fieldset>
+            <legend>generateSerialKey</legend>
+            <button data-method="generateSerialKey">generate</button>
+            <span class="output"></span>
+        </fieldset>
+    </div>
+    <div class="generator">
+        <fieldset>
+            <legend>generateUUID</legend>
+            <button data-method="generateUUID">generate</button>
+            <span class="output"></span>
+        </fieldset>
+    </div>
+</div>
+
+<script>
+    var generatorContainers = document.getElementsByClassName('generator');
+    for (var i = 0; i < generatorContainers.length; i++) {
+        (function () {
+            var generatorContainer = generatorContainers[i];
+            var button             = generatorContainer.getElementsByTagName('button')[0];
+            var span               = generatorContainer.getElementsByTagName('span')[0];
+            var method             = button.dataset.method;
+
+            button.addEventListener('click', function (event) {
+                span.innerHTML = Chelsea[method]();
+            });
+
+            button.click();
+        })();
+    }
+</script>
+</body>
+</html>
