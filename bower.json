@@ -2,14 +2,19 @@
   "name": "chelsea",
   "version": "1.0.0",
   "authors": [
-    "Martin Haubek
+    "wolxXx <devops@wolxXx.de>"
   ],
-  "description": "bs4 button spinners",  
+  "description": "js tools",
+  "main": "chelsea.js",
+  "moduleType": [
+    "es6"
+  ],
   "keywords": [
-    "bs4",
-    "bootstrap4",
-    "spinenrs",
-    "buttons
+    "js",
+    "vanilla js",
+    "javascript",
+    "vanilla javascript",
+    "tools"
   ],
   "license": "MIT",
   "homepage": "",
