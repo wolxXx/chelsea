@@ -1,0 +1,36 @@
+{
+  "name": "chelsea",
+  "keywords": [
+    "js",
+    "vanilla js",
+    "javascript",
+    "vanilla javascript",
+    "tools"
+  ],
+  "description": "chelsea",
+  "homepage": "https://github.com/wolxXx/chelsea",
+  "author": "wolxXx (https://github.com/wolxXx)",
+  "contributors": [
+    "wolxXx <https://github.com/wolxXx>"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wolxXx/chelsea.git"
+  },
+  "browserslist": [
+    ">= 0.5%",
+    "not dead",
+    "Chrome >= 60",
+    "Firefox >= 60",
+    "Firefox ESR",
+    "Edge >= 17",
+    "iOS >= 12",
+    "Safari >= 12",
+    "not Explorer <= 11"
+  ],
+
+  "dependencies": {
+
+  }
+}
